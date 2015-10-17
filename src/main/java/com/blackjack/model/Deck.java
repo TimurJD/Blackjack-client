@@ -6,9 +6,9 @@ import java.util.List;
  * @author Timur Berezhnoi
  */
 public interface Deck {
-	void init();
+	List<Card> init();
 	void shuffle();
 	Card getNextCard();
 	int getCardsLeft();
-	List<Card> getAll();
+	List<Card> getDeck();
 }

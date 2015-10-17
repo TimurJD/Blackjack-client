@@ -9,29 +9,29 @@ import java.util.List;
  */
 public class FrenchDeck implements Deck {
 
-	private List<Card> cards;
+	private List<Card> cards = init();
 
 	public FrenchDeck() {
-		this.cards = new ArrayList<Card>(52);
-		init();
 		shuffle();
 	}
 
 	@Override
-	public void init() {
+	public List<Card> init() {
+		ArrayList<Card> result = new ArrayList<Card>(52);
 		int index = 0;
 		for (int i = 0; i < Suit.NUMBERS_OF_SUITS; i++) {
 			for (int b = 0; b < Rank.NUMBERS_OF_RANKS; b++) {
-				cards.add(index, new Card(Rank.values()[b], Suit.values()[i]));
+				result.add(index, new Card(Rank.values()[b], Suit.values()[i]));
 				index++;
 			}
 		}
+		return result;
 	}
 
 	@Override
 	public void shuffle() {
 		cards.clear();
-		init();
+		cards = init();
 		Collections.shuffle(cards);
 	}
 
@@ -47,7 +47,7 @@ public class FrenchDeck implements Deck {
 	}
 	
 	@Override
-	public List<Card> getAll() {
+	public List<Card> getDeck() {
 		return cards;
 	}
 }
