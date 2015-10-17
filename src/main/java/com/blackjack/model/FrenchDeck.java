@@ -5,12 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Class which represent classic "Frenca deck"
+ * 
  * @author Timur Berezhnoi
+ * @see Deck
  */
 public class FrenchDeck implements Deck {
-
+	
 	private List<Card> cards = init();
-
+	
 	public FrenchDeck() {
 		shuffle();
 	}

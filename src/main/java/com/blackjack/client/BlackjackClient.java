@@ -9,10 +9,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
 import com.blackjack.client.exception.EmptyPropertyException;
+import com.blackjack.model.Card;
 
 /**
  * Simple Blackjack socket client
@@ -103,8 +107,15 @@ public class BlackjackClient {
 		BlackjackClient client = new BlackjackClient();
 		client.connect();
 		
-		client.sendDataToSever(100);
-		System.out.println(client.getDataFromServer());
+		Scanner scanner = new Scanner(System.in);
 		
+		// Here is sending bet to server to begin the game
+		System.out.print("> Enter your bet: " );
+		client.sendDataToSever(scanner.nextInt());
+		
+		// Now client (player) should get first two cards from server.
+		List<Card> hand = (List<Card>) client.getDataFromServer();
+		System.out.println(hand);
+		System.out.println(client.getDataFromServer());
 	}
 }

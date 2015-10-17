@@ -17,9 +17,9 @@ public enum Rank {
 	JACK((byte) 10),
 	QUEEN((byte) 10),
 	KING((byte) 10),
-	ACE((byte) 10);
+	ACE((byte) 11);
 	
-	private final byte score;
+	private byte score;
 	
 	public static final byte NUMBERS_OF_RANKS = 13;
 	
@@ -29,10 +29,5 @@ public enum Rank {
 	
 	public byte getScore() {
 		return score;
-	}
-	
-	public static void main(String[] args) {
-		char c = '\u25C6';
-		System.out.println(c);
 	}
 }

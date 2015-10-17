@@ -22,4 +22,12 @@ public class Card implements Serializable {
 	public Suit getSuit() {
 		return suit;
 	}
+	
+	/**
+	 * @return String representation of Card.
+	 */
+	@Override
+	public String toString() {
+		return rank.getScore() + " " + suit;
+	}
 }
