@@ -98,4 +98,13 @@ public class BlackjackClient {
 	public String toString() {
 		return NAME.getValue();
 	}
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		BlackjackClient client = new BlackjackClient();
+		client.connect();
+		
+		client.sendDataToSever(100);
+		System.out.println(client.getDataFromServer());
+		
+	}
 }
