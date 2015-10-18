@@ -9,20 +9,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.blackjack.client.exception.EmptyPropertyException;
-import com.blackjack.model.Card;
+import com.blackjack.model.GameStatus;
 
 /**
  * Simple Blackjack socket client
  * @author Timur Berezhnoi
  */
-public class BlackjackClient {
+public class BlackjackClient implements Client<Map<String, Object> ,GameStatus> {
 
 	private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -37,6 +35,7 @@ public class BlackjackClient {
 	 * @throws IOException
 	 * @throws EmptyPropertyException
 	 */
+	@Override
 	public void connect() throws IOException {
 		setUpSocket();
 		setUpStreams();
@@ -65,8 +64,9 @@ public class BlackjackClient {
 	 * @param object the object to be sended to a server.
 	 * @throws IOException - if I/O errors occur while writing to the underlying stream.
 	 */
-	public void sendDataToSever(Object object) throws IOException {
-		out.writeObject(object);
+	@Override
+	public void sendDataToSever(GameStatus status) throws IOException {
+		out.writeObject(status);
 		out.flush();
 	}
 
@@ -77,8 +77,9 @@ public class BlackjackClient {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public Object getDataFromServer() throws ClassNotFoundException, IOException {
-		return in.readObject();
+	@Override
+	public Map<String, Object> getDataFromServer() throws ClassNotFoundException, IOException {
+		return (Map<String, Object>) in.readObject();
 	}
 
 	/**
@@ -94,6 +95,7 @@ public class BlackjackClient {
 	 * Disconnect from a server.
 	 * @throws IOException
 	 */
+	@Override
 	public void disconnect() throws IOException {
 		socket.close();
 	}
@@ -103,19 +105,19 @@ public class BlackjackClient {
 		return NAME.getValue();
 	}
 	
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		BlackjackClient client = new BlackjackClient();
-		client.connect();
-		
-		Scanner scanner = new Scanner(System.in);
-		
-		// Here is sending bet to server to begin the game
-		System.out.print("> Enter your bet: " );
-		client.sendDataToSever(scanner.nextInt());
-		
-		// Now client (player) should get first two cards from server.
-		List<Card> hand = (List<Card>) client.getDataFromServer();
-		System.out.println(hand);
-		System.out.println(client.getDataFromServer());
-	}
+//	public static void main(String[] args) throws IOException, ClassNotFoundException {
+//		BlackjackClient client = new BlackjackClient();
+//		client.connect();
+//		
+//		Scanner scanner = new Scanner(System.in);
+//		
+//		// Here is sending bet to server to begin the game
+//		System.out.print("> Enter your bet: " );
+//		client.sendDataToSever(scanner.nextInt());
+//		
+//		// Now client (player) should get first two cards from server.
+//		List<Card> hand = (List<Card>) client.getDataFromServer();
+//		System.out.println(hand);
+//		System.out.println(client.getDataFromServer());
+//	}
 }

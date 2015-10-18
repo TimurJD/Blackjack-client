@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.blackjack.model.GameStatus;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
@@ -61,7 +64,7 @@ public class BlackjackClientTest {
 	
 	@Test
 	public void shouldSendMessageToServer() {
-		String expected = "Client";
+		GameStatus expected = GameStatus.BET;
 		try {
 			client.sendDataToSever(expected);
 			assertEquals(expected, serverIn.readObject());
