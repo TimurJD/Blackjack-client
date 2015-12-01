@@ -20,7 +20,7 @@ import com.blackjack.model.GameStatus;
  * Simple Blackjack socket client
  * @author Timur Berezhnoi
  */
-public class BlackjackClient implements Client<Map<String, Object> ,GameStatus> {
+public class BlackjackClient implements Client<Map<String, Object>, GameStatus> {
 
 	private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -68,6 +68,7 @@ public class BlackjackClient implements Client<Map<String, Object> ,GameStatus> 
 	public void sendDataToSever(GameStatus status) throws IOException {
 		out.writeObject(status);
 		out.flush();
+		out.reset();
 	}
 
 	/**
@@ -104,20 +105,4 @@ public class BlackjackClient implements Client<Map<String, Object> ,GameStatus> 
 	public String toString() {
 		return NAME.getValue();
 	}
-	
-//	public static void main(String[] args) throws IOException, ClassNotFoundException {
-//		BlackjackClient client = new BlackjackClient();
-//		client.connect();
-//		
-//		Scanner scanner = new Scanner(System.in);
-//		
-//		// Here is sending bet to server to begin the game
-//		System.out.print("> Enter your bet: " );
-//		client.sendDataToSever(scanner.nextInt());
-//		
-//		// Now client (player) should get first two cards from server.
-//		List<Card> hand = (List<Card>) client.getDataFromServer();
-//		System.out.println(hand);
-//		System.out.println(client.getDataFromServer());
-//	}
 }

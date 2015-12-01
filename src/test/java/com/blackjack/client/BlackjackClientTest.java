@@ -64,7 +64,7 @@ public class BlackjackClientTest {
 	
 	@Test
 	public void shouldSendMessageToServer() {
-		GameStatus expected = GameStatus.BET;
+		GameStatus expected = GameStatus.DEAL;
 		try {
 			client.sendDataToSever(expected);
 			assertEquals(expected, serverIn.readObject());
