@@ -78,6 +78,7 @@ public class BlackjackClient implements Client<Map<String, Object>, GameStatus> 
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getDataFromServer() throws ClassNotFoundException, IOException {
 		return (Map<String, Object>) in.readObject();
