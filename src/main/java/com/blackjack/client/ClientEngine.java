@@ -63,7 +63,7 @@ public class ClientEngine {
 							System.out.println("///// YOUR HAND ///// - " + playerHand + " -> " + playerHand.getHandScore());
 	
 							if (data.get("status") == GameStatus.PLAYER_WON) { // If player hand at start is equals to 21
-								System.out.println("***** YOU WON AAAAAA *****");
+								System.out.println("***** YOU WON *****");
 								break;
 							} else if(data.get("status") == GameStatus.BUST) {
 								System.out.println("***** YOU BUSTED *****");
@@ -82,7 +82,7 @@ public class ClientEngine {
 								System.out.println("You BUST");
 								break;
 							} else if(dealerHand.getHandScore() < playerHand.getHandScore()) {
-								System.out.println("You WON HERE");
+								System.out.println("***** YOU WON *****");
 								break;
 							} else if(dealerHand.getHandScore() == playerHand.getHandScore()) {
 								System.out.println("DRAW");

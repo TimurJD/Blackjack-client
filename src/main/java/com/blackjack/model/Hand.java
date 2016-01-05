@@ -31,6 +31,11 @@ public class Hand implements Serializable {
 		return cards;
 	}
 	
+	public void dropHand() {
+		score = 0;
+		cards.clear();
+	}
+	
 	@Override
 	public String toString() {
 		return cards.toString();
